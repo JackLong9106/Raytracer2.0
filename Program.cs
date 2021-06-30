@@ -1,10 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Drawing.Imaging;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Raytracer
 {
@@ -12,18 +7,20 @@ namespace Raytracer
     {
         static void Main(string[] args)
         {
-            IniReader inigReader = new IniReader();
-            Console.WriteLine("Hello World");
-            String filePath = "C:\\Users\\Jack Long\\source\\repos\\Raytracer\\Raytracer\\Output.png";
-            ImageFormat imageFormat = ImageFormat.Png;
+            IniReader iniReader = new IniReader();
 
-            Image img = new Image(1000, 1000, filePath, imageFormat, Color.Black);
+            Console.WriteLine("Raytracer Starting");
+
+            Image img = new Image(
+                iniReader.GetResolution()[0],
+                iniReader.GetResolution()[1],
+                iniReader.GetFilePath(),
+                iniReader.GetImageFormat(),
+                Color.Black
+            );
 
             img.PrintDimensions();
             img.Save();
-
-            Console.ReadLine();
-
         }
     }
 }

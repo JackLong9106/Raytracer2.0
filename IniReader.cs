@@ -10,24 +10,24 @@ namespace Raytracer
 {
     class IniReader
     {
-        String filepath;
+        string filepath;
         ImageFormat imageFormat;
-        int width, height;
-
+        int[] resolution = new int[2]; // 0 = width, 1 = height
         
         public IniReader()
         {
             // Gets current system directory and removes the sub folders to get the base folder
-            String directory = Directory.GetCurrentDirectory();
-            directory = directory.Remove(directory.Length - 9, 9);
+            string directory = Directory.GetCurrentDirectory();
+            directory = directory.Remove(directory.Length - 23, 23);
 
             if (System.IO.File.Exists(directory + "config.ini"))
             {
-                String[] lines = System.IO.File.ReadAllLines(directory + "config.ini");
+                string[] lines = System.IO.File.ReadAllLines(directory + "config.ini");
 
                 foreach (string line in lines)
                 {
                     string[] args = line.Split('_');
+
                     ArgReader(args);
                 }
             } 
@@ -38,6 +38,20 @@ namespace Raytracer
             }
         }
 
+        public string GetFilePath()
+        {
+            return filepath;
+        }
+
+        public ImageFormat GetImageFormat()
+        {
+            return imageFormat;
+        }
+
+        public int[] GetResolution()
+        {
+            return resolution;
+        }
 
         private void ArgReader(string[] args)
         {
@@ -50,32 +64,18 @@ namespace Raytracer
 
                 case "ImageFormat":
 
-                    var imageFormat = args[1] switch
+                    imageFormat = args[1] switch
                     {
                         "PNG" => ImageFormat.Png,
                         "JPEG" => ImageFormat.Jpeg,
+                        _ => ImageFormat.Png,
                     };
-
-                    switch (args[1])
-                    {
-                        case "PNG":
-                            imageFormat = ImageFormat.Png;
-                            break;
-
-                        case "JPEG":
-                            imageFormat = ImageFormat.Jpeg;
-                            break;
-
-                        default:
-                            Console.WriteLine("ERROR: Illformed Image Format in config.ini: " + args[1]);
-                            break;
-                    }
 
                     break;
 
                 case "Resolution":
-                    width = int.Parse(args[1]);
-                    height = int.Parse(args[2]);
+                    resolution[0] = int.Parse(args[1]);
+                    resolution[1] = int.Parse(args[2]);
                     break;
 
                 default:

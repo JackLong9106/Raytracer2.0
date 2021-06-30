@@ -11,7 +11,7 @@ namespace Raytracer
     class Image
     {
         Bitmap bitmapImage;
-        String filePath;
+        string filePath;
         ImageFormat imageFormat;
 
         public Image(int width, int height, string filePathIn, ImageFormat imageFormatIn, Color backGroundColour)

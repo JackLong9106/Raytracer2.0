@@ -6,7 +6,7 @@ namespace Raytracer2
 {
     class Vector
     {
-        double x, y, z, length;
+        private double x, y, z, length;
 
         public Vector(double xIn, double yIn, double zIn)
         {
@@ -59,15 +59,41 @@ namespace Raytracer2
                 );
         }
 
-        // NEEDED METHODS
+        public Vector Add(Vector vect)
+        {
+            return new Vector(
+                    (x + vect.getX()),
+                    (y + vect.getY()),
+                    (z + vect.getZ())
+                );
+        }
 
-        // Add
+        public Vector Subtract(Vector vect)
+        {
+            return new Vector(
+                    (x - vect.getX()),
+                    (y - vect.getY()),
+                    (z - vect.getZ())
+                );
+        }
 
-        // Subtract
+        public Vector Multiply(Vector vect)
+        {
+            return new Vector(
+                    (x * vect.getX()),
+                    (y * vect.getY()),
+                    (z * vect.getZ())
+                );
+        }
 
-        // Multiply
-
-        // Divide
+        public Vector Divide(Vector vect)
+        {
+            return new Vector(
+                    (x / vect.getX()),
+                    (y / vect.getY()),
+                    (z / vect.getZ())
+                );
+        }
 
         public double getX()
         {

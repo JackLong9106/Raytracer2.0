@@ -22,11 +22,12 @@ namespace Raytracer2
             img.PrintDimensions();
             img.Save();
 
-            Vector v = new Vector(3, 5, 7);
-            Console.WriteLine(v.GetLength());
+            Vector v = new Vector(5, 2, 1);
+            Vector v2 = new Vector(4, 2, 4);
+            Vector v3 = v.CrossProduct(v2);
+            v3.Print();
 
-            v.Normalise();
-            Console.WriteLine(v.GetLength());
+            Console.WriteLine();
 
         }
     }

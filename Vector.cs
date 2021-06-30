@@ -45,14 +45,21 @@ namespace Raytracer2
             return length;
         }
 
+        public double DotProduct(Vector vect)
+        {
+            return (x * vect.getX()) + (y * vect.getY()) + (z * vect.getZ());
+        }
+
+        public Vector CrossProduct(Vector vect)
+        {
+            return new Vector(
+                    (y * vect.getZ()) - (z * vect.getY()),
+                    (z * vect.getX()) - (x * vect.getZ()),
+                    (x * vect.getY()) - (y * vect.getX())
+                );
+        }
 
         // NEEDED METHODS
-
-        // Normalise
-
-        // dot Product
-
-        // Cross Product
 
         // Add
 
@@ -61,8 +68,6 @@ namespace Raytracer2
         // Multiply
 
         // Divide
-
-        // ToString
 
         public double getX()
         {
@@ -77,6 +82,11 @@ namespace Raytracer2
         public double getZ()
         {
             return z;
+        }
+
+        public void Print()
+        {
+            Console.WriteLine("Vector X:" + x + " Y:" + y + " Z:" + z);
         }
 
     }

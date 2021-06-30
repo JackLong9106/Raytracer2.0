@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Drawing;
 
-namespace Raytracer
+namespace Raytracer2
 {
     class Program
     {
         static void Main(string[] args)
         {
-            IniReader iniReader = new IniReader();
-
             Console.WriteLine("Raytracer Starting");
+
+            IniReader iniReader = new IniReader();
 
             Image img = new Image(
                 iniReader.GetResolution()[0],
@@ -21,6 +21,13 @@ namespace Raytracer
 
             img.PrintDimensions();
             img.Save();
+
+            Vector v = new Vector(3, 5, 7);
+            Console.WriteLine(v.GetLength());
+
+            v.Normalise();
+            Console.WriteLine(v.GetLength());
+
         }
     }
 }

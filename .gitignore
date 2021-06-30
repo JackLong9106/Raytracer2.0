@@ -1,0 +1,8 @@
+# Prerequisites
+*.png
+App.config
+
+# Folders
+/bin/*
+/obj/*
+/properties/*

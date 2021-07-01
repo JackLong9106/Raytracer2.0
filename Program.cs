@@ -29,11 +29,14 @@ namespace Raytracer2
             Point lookAt = new Point(0, 0, 0);
 
             Camera camera = new Camera(pos, lookAt, viewUp, img.GetWidth(), img.GetHeight(), 50);
-            camera.Print();
 
             Point spherePoint = new Point(0,0,0);
             Sphere sphere = new Sphere(spherePoint, 0.3, Color.Red);
-            Shape[] shapesList = { sphere };
+
+            Point spherePoint2 = new Point(1.5, 0.5, -0.5);
+            Sphere sphere2 = new Sphere(spherePoint2, 0.5, Color.Pink);
+
+            Shape[] shapesList = { sphere, sphere2 };
 
             Scene scene = new Scene(camera, shapesList);
 

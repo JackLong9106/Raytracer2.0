@@ -20,7 +20,7 @@ namespace Raytracer2
         public override bool CheckIntersection(Ray ray)
         {
             Vector rayDirection = ray.GetDirection();
-            Point rayOrigin = ray.GetOrigin();
+            Point rayOrigin = ray.GetOrigin().Subtract(position);
 
             double a = rayDirection.DotProduct(rayDirection);
             double b = 2 * rayOrigin.DotProduct(rayDirection);
@@ -59,7 +59,7 @@ namespace Raytracer2
         
         public override Vector GetNormal()
         {
-            return new Vector(0, 0, 0); // TODO temp just to make compliler work
+            return new Vector(0, 0, 0); // TODO temp just to make compliler wo
         }
     }
 }

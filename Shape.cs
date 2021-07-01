@@ -12,7 +12,6 @@ namespace Raytracer2
         public abstract bool CheckIntersection(Ray ray);
 
         public abstract Vector GetNormal();
-        
 
         public Color GetColor()
         {

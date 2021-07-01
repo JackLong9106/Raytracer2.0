@@ -23,8 +23,6 @@ namespace Raytracer2
 
             width = widthIn;
             height = heightIn;
-
-            SetImageBackgroundColour(backGroundColour);
         }
 
         public Bitmap GetImage()

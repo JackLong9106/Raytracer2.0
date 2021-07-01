@@ -36,6 +36,10 @@ namespace Raytracer2
                     if (intersectedShape != null)
                     {
                         image.GetImage().SetPixel(x, y, intersectedShape.GetColor());
+                    } 
+                    else
+                    {
+                        image.GetImage().SetPixel(x, y, Color.Black);
                     }
 
                     //Console.WriteLine("X: " + x + ", Y: " + y);

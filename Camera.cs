@@ -65,6 +65,16 @@ namespace Raytracer2
             return viewPlaneNormal;
         }
 
+        public double GetWidth()
+        {
+            return width;
+        }
+
+        public double GetHeight()
+        {
+            return height;
+        }
+
         public void Print()
         {
             Console.WriteLine("Printing Camera...");

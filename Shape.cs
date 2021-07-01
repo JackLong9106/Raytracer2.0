@@ -6,5 +6,11 @@ namespace Raytracer2
 {
     class Shape
     {
+        Point position; 
+
+        public Shape()
+        {
+
+        }
     }
 }

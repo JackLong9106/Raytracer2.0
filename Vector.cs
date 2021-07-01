@@ -74,12 +74,12 @@ namespace Raytracer2
                 );
         }
 
-        public Vector Multiply(Vector vect)
+        public Vector Multiply(double val)
         {
             return new Vector(
-                    (x * vect.getX()),
-                    (y * vect.getY()),
-                    (z * vect.getZ())
+                    (x * val),
+                    (y * val),
+                    (z * val)
                 );
         }
 

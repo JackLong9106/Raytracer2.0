@@ -28,6 +28,14 @@ namespace Raytracer2
 
             Camera camera = new Camera(pos, lookAt, viewUp, img.GetWidth(), img.GetHeight(), 50);
             camera.Print();
+
+            Shape shape = new Shape();
+            Shape[] shapesList = { shape };
+
+            Scene scene = new Scene(camera, shapesList);
+
+            Raytracer raytracer = new Raytracer(scene, img);
+            raytracer.Raytrace();
         }
     }
 }

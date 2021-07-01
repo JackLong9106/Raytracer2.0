@@ -47,12 +47,12 @@ namespace Raytracer2
                 );
         }
 
-        public Point Multiply(Point vect)
+        public Point Multiply(double val)
         {
             return new Point(
-                    (x * vect.getX()),
-                    (y * vect.getY()),
-                    (z * vect.getZ())
+                    (x * val),
+                    (y * val),
+                    (z * val)
                 );
         }
 

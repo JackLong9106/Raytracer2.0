@@ -9,11 +9,20 @@ namespace Raytracer2
         Camera camera;
         Shape[] shapesList;
 
-        public Scene(Image imageIn, Camera cameraIn, Shape[] shapesListIn)
+        public Scene( Camera cameraIn, Shape[] shapesListIn)
         {
-            image = imageIn;
             camera = cameraIn;
             shapesList = shapesListIn;
+        }
+
+        public Camera GetCamera()
+        {
+            return camera;
+        }
+
+        public Shape[] GetShapesList()
+        {
+            return shapesList;
         }
     }
 }

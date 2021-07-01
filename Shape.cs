@@ -1,16 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Text;
 
 namespace Raytracer2
 {
-    class Shape
+    abstract class Shape
     {
-        Point position; 
+        protected Color color;
 
-        public Shape()
+        public abstract bool CheckIntersection(Ray ray);
+
+        public abstract Vector GetNormal();
+        
+
+        public Color GetColor()
         {
-
+            return color;
         }
     }
 }

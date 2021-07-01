@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Text;
 
 namespace Raytracer2
@@ -30,6 +31,11 @@ namespace Raytracer2
 
                     ray = GenerateRay(screenCoord);
 
+                    if (CastRayIntoScene(ray))
+                    {
+                        image.GetImage().SetPixel(x, y, Color.White);
+                    }
+
                     //Console.WriteLine("X: " + x + ", Y: " + y);
                     //screenCoord.Print();
                     //ray.Print();
@@ -39,7 +45,7 @@ namespace Raytracer2
             return image;
         }
 
-        public Ray GenerateRay(Point screenCoord)
+        private Ray GenerateRay(Point screenCoord)
         {
             // Formula: forward + (x * width * right) + (y * height * up);
 
@@ -58,6 +64,19 @@ namespace Raytracer2
             outputVector.Normalise();
 
             return new Ray(scene.GetCamera().GetPosition(), outputVector);
+        }
+
+        private bool CastRayIntoScene(Ray ray)
+        {
+            foreach (Shape shape in scene.GetShapesList())
+            {
+                if (shape.CheckIntersection(ray))
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
     }
 }

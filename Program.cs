@@ -7,7 +7,9 @@ namespace Raytracer2
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Raytracer Starting");
+            var timer = System.Diagnostics.Stopwatch.StartNew();
+
+            Console.WriteLine("Raytracer Starting...");
 
             IniReader iniReader = new IniReader();
 
@@ -38,6 +40,10 @@ namespace Raytracer2
             Raytracer raytracer = new Raytracer(scene, img);
             img = raytracer.Raytrace();
             img.Save();
+
+            timer.Stop();
+
+            Console.WriteLine($"Raytracing finished, execution time: { ((double)timer.ElapsedMilliseconds / 1000) } seconds.");
         }
     }
 }

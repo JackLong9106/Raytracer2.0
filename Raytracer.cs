@@ -31,9 +31,11 @@ namespace Raytracer2
 
                     ray = GenerateRay(screenCoord);
 
-                    if (CastRayIntoScene(ray))
+                    Shape intersectedShape = CastRayIntoScene(ray);
+
+                    if (intersectedShape != null)
                     {
-                        image.GetImage().SetPixel(x, y, Color.White);
+                        image.GetImage().SetPixel(x, y, intersectedShape.GetColor());
                     }
 
                     //Console.WriteLine("X: " + x + ", Y: " + y);
@@ -66,17 +68,17 @@ namespace Raytracer2
             return new Ray(scene.GetCamera().GetPosition(), outputVector);
         }
 
-        private bool CastRayIntoScene(Ray ray)
+        private Shape CastRayIntoScene(Ray ray)
         {
             foreach (Shape shape in scene.GetShapesList())
             {
                 if (shape.CheckIntersection(ray))
                 {
-                    return true;
+                    return shape;
                 }
             }
 
-            return false;
+            return null;
         }
     }
 }

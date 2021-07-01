@@ -22,13 +22,12 @@ namespace Raytracer2
             img.PrintDimensions();
             img.Save();
 
-            Vector v = new Vector(5, 2, 1);
-            Vector v2 = new Vector(4, 2, 4);
-            Vector v3 = v.CrossProduct(v2);
-            v3.Print();
+            Vector viewUp = new Vector(0,1,0);
+            Point pos = new Point(0, 0, 1);
+            Point lookAt = new Point(0, 0, 0);
 
-            Console.WriteLine();
-
+            Camera camera = new Camera(pos, lookAt, viewUp, img.GetWidth(), img.GetHeight(), 50);
+            camera.Print();
         }
     }
 }

@@ -13,12 +13,16 @@ namespace Raytracer2
         Bitmap bitmapImage;
         string filePath;
         ImageFormat imageFormat;
+        int width, height;
 
-        public Image(int width, int height, string filePathIn, ImageFormat imageFormatIn, Color backGroundColour)
+        public Image(int widthIn, int heightIn, string filePathIn, ImageFormat imageFormatIn, Color backGroundColour)
         {
-            bitmapImage = new Bitmap(width, height);
+            bitmapImage = new Bitmap(widthIn, heightIn);
             filePath = filePathIn;
             imageFormat = imageFormatIn;
+
+            width = widthIn;
+            height = heightIn;
 
             SetImageBackgroundColour(backGroundColour);
         }
@@ -47,6 +51,16 @@ namespace Raytracer2
                     bitmapImage.SetPixel(x, y, backgroundColour);
                 }
             }
+        }
+
+        public int GetWidth()
+        {
+            return width;
+        }
+
+        public int GetHeight()
+        {
+            return height;
         }
     }
 }

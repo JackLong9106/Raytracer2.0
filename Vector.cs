@@ -16,22 +16,19 @@ namespace Raytracer2
             CalculateLength();
         }
 
-        public Vector(Vector vect1, Vector vect2) : base(vect1.getX() - vect2.getX(), vect1.getY() - vect2.getY(), vect1.getZ() - vect2.getZ())
+        public Vector(Point point1, Point point2) : base(point1.getX() - point2.getX(), point1.getY() - point2.getY(), point1.getZ() - point2.getZ())
         {
-            x = vect1.getX() - vect2.getX();
-            y = vect1.getY() - vect2.getY();
-            z = vect1.getZ() - vect2.getZ();
+            x = point1.getX() - point2.getX();
+            y = point1.getY() - point2.getY();
+            z = point1.getZ() - point2.getZ();
             CalculateLength();
         }
 
         public void Normalise()
         {
             x /= length;
-            Console.WriteLine("x " + x);
             y /= length;
-            Console.WriteLine("y " + y);
             z /= length;
-            Console.WriteLine("z " + z);
             CalculateLength();
         }
 

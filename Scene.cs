@@ -6,7 +6,6 @@ namespace Raytracer2
 {
     class Scene
     {
-        Image image;
         Camera camera;
         Shape[] shapesList;
 

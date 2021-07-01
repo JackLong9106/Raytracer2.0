@@ -4,11 +4,11 @@ using System.Text;
 
 namespace Raytracer2
 {
-    class Vector
+    class Vector : Point
     {
-        private double x, y, z, length;
+        private double length;
 
-        public Vector(double xIn, double yIn, double zIn)
+        public Vector(double xIn, double yIn, double zIn) : base(xIn, yIn, zIn)
         {
             x = xIn;
             y = yIn;
@@ -16,7 +16,7 @@ namespace Raytracer2
             CalculateLength();
         }
 
-        public Vector(Vector vect1, Vector vect2)
+        public Vector(Vector vect1, Vector vect2) : base(vect1.getX() - vect2.getX(), vect1.getY() - vect2.getY(), vect1.getZ() - vect2.getZ())
         {
             x = vect1.getX() - vect2.getX();
             y = vect1.getY() - vect2.getY();
@@ -93,21 +93,6 @@ namespace Raytracer2
                     (y / vect.getY()),
                     (z / vect.getZ())
                 );
-        }
-
-        public double getX()
-        {
-            return x;
-        }
-
-        public double getY()
-        {
-            return y;
-        }
-
-        public double getZ()
-        {
-            return z;
         }
 
         public void Print()

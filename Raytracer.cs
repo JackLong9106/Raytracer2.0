@@ -84,5 +84,10 @@ namespace Raytracer2
 
             return null;
         }
+
+        private Color CalculateShading()
+        {
+            return Color.Black;
+        }
     }
 }

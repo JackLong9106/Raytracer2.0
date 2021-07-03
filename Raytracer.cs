@@ -108,16 +108,17 @@ namespace Raytracer2
             {
                 lightVector = new Vector(intersection.GetIntersectionPoint(), light.GetPosition());
                 cameraVector = new Vector(scene.GetCamera().GetPosition(), intersection.GetIntersectionPoint());
-                reflectionVector = shapeNormal.Subtract(lightVector).Multiply(2 * (lightVector.DotProduct(shapeNormal)));
+                reflectionVector = shapeNormal.Subtract(lightVector).Multiply(2 * lightVector.DotProduct(shape.GetNormal(shapeNormal))); ;
+
 
                 lightVector.Normalise();
                 cameraVector.Normalise();
                 reflectionVector.Normalise();
 
                 diffuse = shape.GetDiffuse() * light.GetBrightness() * (lightVector.DotProduct(shapeNormal));
-                specular = shape.GetSpecular() * light.GetBrightness() * Math.Pow(cameraVector.DotProduct(reflectionVector), shape.GetShine());
+                specular = shape.GetSpecular() * light.GetBrightness() * Math.Pow(lightVector.DotProduct(reflectionVector), shape.GetShine());
 
-                phong += diffuse;
+                phong += diffuse + specular;
             }
 
             return phong + ambient;

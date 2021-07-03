@@ -7,10 +7,33 @@ namespace Raytracer2
     {
         static void Main(string[] args)
         {
-            var timer = System.Diagnostics.Stopwatch.StartNew();
+            // - - - Materials - - -
+            double diffuseMatt = 0.5;
+            double specMatt = 0.08;
+            double shineMatt = 8;
 
-            Console.WriteLine("Raytracer Starting...");
+            Material diffuseRedMaterial = new Material(diffuseMatt, specMatt, shineMatt, Color.Red);
+            Material diffuseBlueMaterial = new Material(diffuseMatt, specMatt, shineMatt, Color.Blue);
 
+            double diffuseMetal = 0.2;
+            double specMetal = 0.8;
+            double shineMetal = 8;
+
+            Material diffuseSteelBlueMetal = new Material(diffuseMetal, specMetal, shineMetal, Color.SteelBlue);
+            Material diffuseGoldMetal = new Material(diffuseMetal, specMetal, shineMetal, Color.Gold);
+
+            // - - - Shapes - - -
+            Point spherePoint = new Point(1, 0, 0);
+            Point spherePoint2 = new Point(-1, 0, 0);
+
+            double radius05 = 0.5;
+
+            Sphere sphere = new Sphere(spherePoint, radius05, diffuseSteelBlueMetal);
+            Sphere sphere2 = new Sphere(spherePoint2, radius05, diffuseBlueMaterial);
+
+            Shape[] shapesList = { sphere, sphere2 };
+
+            // - - - Image - - -
             IniReader iniReader = new IniReader();
 
             Image img = new Image(
@@ -21,37 +44,31 @@ namespace Raytracer2
                 Color.Black
             );
 
-            Vector viewUp = new Vector(0,1,0);
+            // - - - Camera - - -
+            Vector viewUp = new Vector(0, 1, 0);
             Point pos = new Point(0, 0, 3);
             Point lookAt = new Point(0, 0, 0);
 
             Camera camera = new Camera(pos, lookAt, viewUp, img.GetWidth(), img.GetHeight(), 50);
 
-            Point spherePoint = new Point(1,0,0);
-            Material redMaterial = new Material(0.2, 0.5, 1, Color.Red);
-            Sphere sphere = new Sphere(spherePoint, 0.5, redMaterial);
-
-            Point spherePoint2 = new Point(-1, 0, 0);
-            Material blueMaterial = new Material(0.2, 0.5, 4, Color.Blue);
-            Sphere sphere2 = new Sphere(spherePoint2, 0.5, blueMaterial);
-
-            Shape[] shapesList = { sphere, sphere2 };
-
+            // - - - Lights - - -
             Point lightPoint1 = new Point(0, 1, 1);
             Light light = new Light(1, Color.White, lightPoint1);
             Light[] Lightlist = { light };
 
+            // - - - Scene - - -
             Scene scene = new Scene(camera, shapesList, Lightlist);
 
+            // - - - Renderer - - -
+            Console.WriteLine("Raytracer Starting...");
+            var timer = System.Diagnostics.Stopwatch.StartNew();
+
             double ambient = 0.1;
+
             Raytracer raytracer = new Raytracer(scene, img, ambient);
+
             img = raytracer.Raytrace();
             img.Save();
-
-            camera.GetViewPlaneUp().Print();
-            camera.GetViewPlaneRight().Print();
-            camera.GetViewPlaneNormal().Print();
-            camera.GetPosition().Print();
 
             timer.Stop();
 

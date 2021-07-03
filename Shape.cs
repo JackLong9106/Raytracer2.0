@@ -9,9 +9,9 @@ namespace Raytracer2
     {
         protected Material material;
 
-        public abstract bool CheckIntersection(Ray ray);
+        public abstract Intersection CheckIntersection(Ray ray);
 
-        public abstract Vector GetNormal();
+        public abstract Vector GetNormal(Point intersectedPoint);
        
         public double GetDiffuse()
         {
@@ -25,6 +25,11 @@ namespace Raytracer2
         public Color GetColor()
         {
             return material.GetColor();
+        }
+
+        public double GetShine()
+        {
+            return material.GetShine();
         }
     }
 }

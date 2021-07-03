@@ -80,6 +80,13 @@ namespace Raytracer2
             return z;
         }
 
+        public void Inverse()
+        {
+            x = -x;
+            y = -y;
+            z = -z;
+        }
+
         public void Print()
         {
             Console.WriteLine("Point X:" + x + " Y:" + y + " Z:" + z);

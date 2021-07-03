@@ -31,7 +31,5 @@ namespace Raytracer2
         {
             return position;
         }
-
-        
     }
 }

@@ -9,11 +9,13 @@ namespace Raytracer2
     {
         Scene scene;
         Image image;
+        double ambient;
 
-        public Raytracer(Scene sceneIn, Image imageIn)
+        public Raytracer(Scene sceneIn, Image imageIn, double ambientIn)
         {
             scene = sceneIn;
             image = imageIn;
+            ambient = ambientIn;
         }
 
         public Image Raytrace()
@@ -31,12 +33,14 @@ namespace Raytracer2
 
                     ray = GenerateRay(screenCoord);
 
-                    Shape intersectedShape = CastRayIntoScene(ray);
+                    Intersection intersection = CastRayIntoScene(ray);
 
-                    if (intersectedShape != null)
+                    if (intersection.GetIntersected())
                     {
-                        image.GetImage().SetPixel(x, y, intersectedShape.GetColor());
-                    } 
+                        double phong = CalculatePhong(intersection);
+                        Color colour = CalculateShading(intersection.GetIntersectionShape(), phong);
+                        image.GetImage().SetPixel(x, y, colour);
+                    }
                     else
                     {
                         image.GetImage().SetPixel(x, y, Color.Black);
@@ -72,22 +76,89 @@ namespace Raytracer2
             return new Ray(scene.GetCamera().GetPosition(), outputVector);
         }
 
-        private Shape CastRayIntoScene(Ray ray)
+        private Intersection CastRayIntoScene(Ray ray)
         {
+            Intersection intersection = new Intersection();
+
             foreach (Shape shape in scene.GetShapesList())
             {
-                if (shape.CheckIntersection(ray))
+                intersection = shape.CheckIntersection(ray);
+
+                if (intersection.GetIntersected())
                 {
-                    return shape;
+                    return intersection;
                 }
             }
 
-            return null;
+            return intersection;
         }
 
-        private Color CalculateShading()
+        private double CalculatePhong(Intersection intersection)
         {
-            return Color.Black;
+            // diffuse = shape diffuse * light intensity * (lightvector dot shape normal)
+            // specular = specular intensity * (light intensity * (camera vect dot reflection vect)^ shine)
+            // phong = ambient + diffuse + specular
+
+            double diffuse, specular, phong = 0;
+            Shape shape = intersection.GetIntersectionShape();
+            Vector lightVector, cameraVector, reflectionVector, shapeNormal = shape.GetNormal(intersection.GetIntersectionPoint()) ;
+            
+
+            foreach (Light light in scene.GetLightList())
+            {
+                lightVector = new Vector(light.GetPosition(), intersection.GetIntersectionPoint());
+                cameraVector = new Vector(scene.GetCamera().GetPosition(), intersection.GetIntersectionPoint());
+                reflectionVector = shapeNormal.Subtract(lightVector).Multiply(2 * (lightVector.DotProduct(shapeNormal)));
+
+                lightVector.Normalise();
+                cameraVector.Normalise();
+                reflectionVector.Normalise();
+
+                diffuse = shape.GetDiffuse() * light.GetBrightness() * (lightVector.DotProduct(shapeNormal));
+                specular = shape.GetSpecular() * light.GetBrightness() * Math.Pow(cameraVector.DotProduct(reflectionVector), shape.GetShine());
+
+                phong += diffuse;
+            }
+
+            return phong + ambient;
+        }
+
+        private Color CalculateShading(Shape intersectedShape, double Phong)
+        {
+            Color shapeColour = intersectedShape.GetColor();
+
+            int r = Convert.ToInt32((shapeColour.R * Phong));
+            int g = Convert.ToInt32((shapeColour.G * Phong));
+            int b = Convert.ToInt32((shapeColour.B * Phong));
+
+            if (r > 255)
+            {
+                r = 255;
+            }
+            else if (r < 0)
+            {
+                r = 0;
+            }
+
+            if (g > 255)
+            {
+                g = 255;
+            }
+            else if (g < 0)
+            {
+                g = 0;
+            }
+
+            if (b > 255)
+            {
+                b = 255;
+            }
+            else if (b < 0)
+            {
+                b = 0;
+            }
+
+            return Color.FromArgb(r, g, b);
         }
     }
 }

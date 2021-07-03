@@ -10,17 +10,18 @@ namespace Raytracer2
         Point position;
         double radius;
 
-        public Sphere(Point p, double r, Color colorIn)
+        public Sphere(Point p, double r, Material materialIn)
         {
             position = p;
             radius = r;
-            color = colorIn;
+            material = materialIn;
         }
 
-        public override bool CheckIntersection(Ray ray)
+        public override Intersection CheckIntersection(Ray ray)
         {
             Vector rayDirection = ray.GetDirection();
             Point rayOrigin = ray.GetOrigin().Subtract(position);
+            Intersection intersection = new Intersection();
 
             double a = rayDirection.DotProduct(rayDirection);
             double b = 2 * rayOrigin.DotProduct(rayDirection);
@@ -30,7 +31,7 @@ namespace Raytracer2
 
             if (quadratic < 0)
             {
-                return false;
+                return intersection;
             }
 
             double distance1 = (-b - Math.Sqrt(quadratic)) / (2 * a); // First intersection (close)
@@ -38,28 +39,33 @@ namespace Raytracer2
 
             if (distance1 < 0 && distance2 > 0)
             {
-                return false;
+                return intersection;
             }
             else if (distance1 >= 0 && distance2 >= 0)
             {
-                if (distance1 <= distance2)
+                if (distance1 > distance2)
                 {
-                    return true;
+                    intersection.Intersected(distance1, this, ray);
+                    return intersection;
                 }
                 else
                 {
-                    return true;
+                    intersection.Intersected(distance2, this, ray);
+                    return intersection;
                 }
             } 
             else
             {
-                return false;
+                return intersection;
             }
         }
         
-        public override Vector GetNormal()
+        public override Vector GetNormal(Point intersectedPoint)
         {
-            return new Vector(0, 0, 0); // TODO temp just to make compliler wo
+            Vector normal = new Vector(position, intersectedPoint);
+            normal.Normalise();
+
+            return normal;
         }
     }
 }

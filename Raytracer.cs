@@ -37,6 +37,7 @@ namespace Raytracer2
 
                     if (intersection.GetIntersected())
                     {
+                        
                         double phong = CalculatePhong(intersection);
                         Color colour = CalculateShading(intersection.GetIntersectionShape(), phong);
                         image.GetImage().SetPixel(x, y, colour);
@@ -108,29 +109,30 @@ namespace Raytracer2
             {
                 lightVector = new Vector(intersection.GetIntersectionPoint(), light.GetPosition());
                 cameraVector = new Vector(scene.GetCamera().GetPosition(), intersection.GetIntersectionPoint());
-                reflectionVector = shapeNormal.Subtract(lightVector).Multiply(2 * lightVector.DotProduct(shape.GetNormal(shapeNormal))); ;
+                reflectionVector = shapeNormal.Subtract(lightVector).Multiply(2 * lightVector.DotProduct(shape.GetNormal(shapeNormal)));
+                
 
 
                 lightVector.Normalise();
                 cameraVector.Normalise();
                 reflectionVector.Normalise();
 
-                diffuse = shape.GetDiffuse() * light.GetBrightness() * (lightVector.DotProduct(shapeNormal));
+                diffuse = shape.GetDiffuse() * light.GetBrightness() * lightVector.DotProduct(shapeNormal);
                 specular = shape.GetSpecular() * light.GetBrightness() * Math.Pow(lightVector.DotProduct(reflectionVector), shape.GetShine());
 
                 phong += diffuse + specular;
             }
-
-            return phong + ambient;
+                
+            return MinZero(phong) + ambient;
         }
 
         private Color CalculateShading(Shape intersectedShape, double Phong)
         {
             Color shapeColour = intersectedShape.GetColor();
 
-            int r = Convert.ToInt32((shapeColour.R * Phong));
-            int g = Convert.ToInt32((shapeColour.G * Phong));
-            int b = Convert.ToInt32((shapeColour.B * Phong));
+            int r = Convert.ToInt32(shapeColour.R * Phong);
+            int g = Convert.ToInt32(shapeColour.G * Phong);
+            int b = Convert.ToInt32(shapeColour.B * Phong);
 
             if (r > 255)
             {
@@ -160,6 +162,16 @@ namespace Raytracer2
             }
 
             return Color.FromArgb(r, g, b);
+        }
+
+        private double MinZero(double val)
+        {
+            if (val < 0)
+            {
+                return 0;
+            }
+
+            return val;
         }
     }
 }

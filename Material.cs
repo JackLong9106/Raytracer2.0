@@ -9,13 +9,15 @@ namespace Raytracer2
     {
         private double diffuseIntensity, specularIntensity, shine;
         Color colour;
+        bool reflective;
 
-        public Material(double diffuse, double spec, double shineIn, Color colourIn)
+        public Material(double diffuse, double spec, double shineIn, Color colourIn, bool reflectiveIn)
         {
             diffuseIntensity = diffuse;
             specularIntensity = spec;
             colour = colourIn;
             shine = shineIn;
+            reflective = reflectiveIn;
         }
 
         public double GetDiffuseIntensity()

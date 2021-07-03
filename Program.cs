@@ -12,15 +12,15 @@ namespace Raytracer2
             double specMatt = 0.08;
             double shineMatt = 8;
 
-            Material diffuseRedMaterial = new Material(diffuseMatt, specMatt, shineMatt, Color.Red);
-            Material diffuseBlueMaterial = new Material(diffuseMatt, specMatt, shineMatt, Color.Blue);
+            Material diffuseRedMaterial = new Material(diffuseMatt, specMatt, shineMatt, Color.Red, false);
+            Material diffuseBlueMaterial = new Material(diffuseMatt, specMatt, shineMatt, Color.Blue, false);
 
-            double diffuseMetal = 0.2;
+            double diffuseMetal = 1;
             double specMetal = 0.8;
-            double shineMetal = 8;
+            double shineMetal = 6;
 
-            Material diffuseSteelBlueMetal = new Material(diffuseMetal, specMetal, shineMetal, Color.SteelBlue);
-            Material diffuseGoldMetal = new Material(diffuseMetal, specMetal, shineMetal, Color.Gold);
+            Material diffuseSteelBlueMetal = new Material(diffuseMetal, specMetal, shineMetal, Color.SteelBlue, true);
+            Material diffuseGoldMetal = new Material(diffuseMetal, specMetal, shineMetal, Color.Gold, true);
 
             // - - - Shapes - - -
             Point spherePoint = new Point(1, 0, 0);
@@ -63,7 +63,7 @@ namespace Raytracer2
             Console.WriteLine("Raytracer Starting...");
             var timer = System.Diagnostics.Stopwatch.StartNew();
 
-            double ambient = 0.1;
+            double ambient = 0.025;
 
             Raytracer raytracer = new Raytracer(scene, img, ambient);
 

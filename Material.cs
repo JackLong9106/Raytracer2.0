@@ -39,5 +39,10 @@ namespace Raytracer2
         {
             return shine;
         }
+
+        public bool GetReflective()
+        {
+            return reflective;
+        }
     }
 }

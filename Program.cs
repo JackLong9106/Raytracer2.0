@@ -53,8 +53,13 @@ namespace Raytracer2
 
             // - - - Lights - - -
             Point lightPoint1 = new Point(0, 1, 1);
-            Light light = new Light(1, Color.White, lightPoint1);
-            Light[] Lightlist = { light };
+            Light light1 = new Light(1, Color.White, lightPoint1);
+
+            Point lightPoint2 = new Point(0, -1, 1);
+            Light light2 = new Light(1, Color.White, lightPoint2);
+
+
+            Light[] Lightlist = { light1, light2 };
 
             // - - - Scene - - -
             Scene scene = new Scene(camera, shapesList, Lightlist);

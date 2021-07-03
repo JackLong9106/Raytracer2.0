@@ -43,21 +43,20 @@ namespace Raytracer2
             }
             else if (distance1 >= 0 && distance2 >= 0)
             {
-                if (distance1 > distance2)
+                if (distance1 > distance2 && distance2 > ray.GetRayMin())
                 {
                     intersection.Intersected(distance2, this, ray);
                     return intersection;
                 }
-                else
+                else if (distance1 > ray.GetRayMin())
                 {
                     intersection.Intersected(distance1, this, ray);
                     return intersection;
                 }
             } 
-            else
-            {
-                return intersection;
-            }
+                
+            return intersection;
+            
         }
         
         public override Vector GetNormal(Point intersectedPoint)

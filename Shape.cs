@@ -31,5 +31,10 @@ namespace Raytracer2
         {
             return material.GetShine();
         }
+
+        public bool GetReflective()
+        {
+            return material.GetReflective();
+        }
     }
 }

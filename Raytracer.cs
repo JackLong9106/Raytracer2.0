@@ -37,7 +37,6 @@ namespace Raytracer2
 
                     if (intersection.GetIntersected())
                     {
-                        
                         double phong = CalculatePhong(intersection);
                         Color colour = CalculateShading(intersection.GetIntersectionShape(), phong);
                         image.GetImage().SetPixel(x, y, colour);
@@ -87,6 +86,14 @@ namespace Raytracer2
 
                 if (intersection.GetIntersected())
                 {
+                    if (intersection.GetIntersectionShape().GetReflective())
+                    {
+                        Vector reflectionVect = shape.GetNormal(intersection.GetIntersectionPoint()).Subtract(intersection.GetRay().GetDirection())
+                            .Multiply(2 * intersection.GetRay().GetDirection().DotProduct(shape.GetNormal(intersection.GetIntersectionPoint())));
+                        
+                        CastRayIntoScene(new Ray(intersection.GetIntersectionPoint(), reflectionVect));
+                    }
+
                     return intersection;
                 }
             }

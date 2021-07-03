@@ -10,19 +10,22 @@ namespace Raytracer2
         Point intersectionPoint;
         Shape intersectionShape;
         double distance;
+        Ray ray;
 
         public Intersection()
         {
             intersected = false;
             intersectionShape = null;
             intersectionPoint = null;
+            ray = null;
         }
 
-        public void Intersected(double dist, Shape shapeIn, Ray ray)
+        public void Intersected(double dist, Shape shapeIn, Ray rayIn)
         {
             intersected = true;
             intersectionShape = shapeIn;
             distance = dist;
+            ray = rayIn;
 
             intersectionPoint = ray.GetOrigin().Add(ray.GetDirection().Multiply(dist));
         }
@@ -40,6 +43,11 @@ namespace Raytracer2
         public Shape GetIntersectionShape()
         {
             return intersectionShape;
+        }
+
+        public Ray GetRay()
+        {
+            return ray;
         }
     }
 }

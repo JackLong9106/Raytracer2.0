@@ -106,7 +106,7 @@ namespace Raytracer2
 
             foreach (Light light in scene.GetLightList())
             {
-                lightVector = new Vector(light.GetPosition(), intersection.GetIntersectionPoint());
+                lightVector = new Vector(intersection.GetIntersectionPoint(), light.GetPosition());
                 cameraVector = new Vector(scene.GetCamera().GetPosition(), intersection.GetIntersectionPoint());
                 reflectionVector = shapeNormal.Subtract(lightVector).Multiply(2 * (lightVector.DotProduct(shapeNormal)));
 

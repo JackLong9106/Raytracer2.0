@@ -45,12 +45,12 @@ namespace Raytracer2
             {
                 if (distance1 > distance2)
                 {
-                    intersection.Intersected(distance1, this, ray);
+                    intersection.Intersected(distance2, this, ray);
                     return intersection;
                 }
                 else
                 {
-                    intersection.Intersected(distance2, this, ray);
+                    intersection.Intersected(distance1, this, ray);
                     return intersection;
                 }
             } 

@@ -37,7 +37,7 @@ namespace Raytracer2
 
             Shape[] shapesList = { sphere, sphere2 };
 
-            Point lightPoint1 = new Point(0, 3, 3);
+            Point lightPoint1 = new Point(0, 1, 1);
             Light light = new Light(1, Color.White, lightPoint1);
             Light[] Lightlist = { light };
 

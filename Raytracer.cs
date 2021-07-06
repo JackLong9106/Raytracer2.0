@@ -60,11 +60,11 @@ namespace Raytracer2
             // Formula: forward + (x * width * right) + (y * height * up);
 
             Vector rightVect = scene.GetCamera().GetViewPlaneRight();
-            rightVect = rightVect.Multiply(screenCoord.getX());
+            rightVect = rightVect.Multiply(screenCoord.GetX());
             rightVect = rightVect.Multiply(scene.GetCamera().GetWidth());
 
             Vector upVect = scene.GetCamera().GetViewPlaneUp();
-            upVect = upVect.Multiply(screenCoord.getY());
+            upVect = upVect.Multiply(screenCoord.GetY());
             upVect = upVect.Multiply(scene.GetCamera().GetHeight());
 
             Vector outputVector = scene.GetCamera().GetViewPlaneNormal();

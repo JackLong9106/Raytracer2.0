@@ -17,33 +17,33 @@ namespace Raytracer2
 
         public double DotProduct(Point vect)
         {
-            return (x * vect.getX()) + (y * vect.getY()) + (z * vect.getZ());
+            return (x * vect.GetX()) + (y * vect.GetY()) + (z * vect.GetZ());
         }
 
         public Point CrossProduct(Point vect)
         {
             return new Point(
-                    (y * vect.getZ()) - (z * vect.getY()),
-                    (z * vect.getX()) - (x * vect.getZ()),
-                    (x * vect.getY()) - (y * vect.getX())
+                    (y * vect.GetZ()) - (z * vect.GetY()),
+                    (z * vect.GetX()) - (x * vect.GetZ()),
+                    (x * vect.GetY()) - (y * vect.GetX())
                 );
         }
 
         public Point Add(Point vect)
         {
             return new Point(
-                    (x + vect.getX()),
-                    (y + vect.getY()),
-                    (z + vect.getZ())
+                    (x + vect.GetX()),
+                    (y + vect.GetY()),
+                    (z + vect.GetZ())
                 );
         }
 
         public Point Subtract(Point vect)
         {
             return new Point(
-                    (x - vect.getX()),
-                    (y - vect.getY()),
-                    (z - vect.getZ())
+                    (x - vect.GetX()),
+                    (y - vect.GetY()),
+                    (z - vect.GetZ())
                 );
         }
 
@@ -59,23 +59,23 @@ namespace Raytracer2
         public Point Divide(Point vect)
         {
             return new Point(
-                    (x / vect.getX()),
-                    (y / vect.getY()),
-                    (z / vect.getZ())
+                    (x / vect.GetX()),
+                    (y / vect.GetY()),
+                    (z / vect.GetZ())
                 );
         }
 
-        public double getX()
+        public double GetX()
         {
             return x;
         }
 
-        public double getY()
+        public double GetY()
         {
             return y;
         }
 
-        public double getZ()
+        public double GetZ()
         {
             return z;
         }

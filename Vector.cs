@@ -16,11 +16,11 @@ namespace Raytracer2
             CalculateLength();
         }
 
-        public Vector(Point point1, Point point2) : base(point1.getX() - point2.getX(), point1.getY() - point2.getY(), point1.getZ() - point2.getZ())
+        public Vector(Point point1, Point point2) : base(point1.GetX() - point2.GetX(), point1.GetY() - point2.GetY(), point1.GetZ() - point2.GetZ())
         {
-            x = point1.getX() - point2.getX();
-            y = point1.getY() - point2.getY();
-            z = point1.getZ() - point2.getZ();
+            x = point1.GetX() - point2.GetX();
+            y = point1.GetY() - point2.GetY();
+            z = point1.GetZ() - point2.GetZ();
             CalculateLength();
         }
 
@@ -44,33 +44,33 @@ namespace Raytracer2
 
         public double DotProduct(Vector vect)
         {
-            return (x * vect.getX()) + (y * vect.getY()) + (z * vect.getZ());
+            return (x * vect.GetX()) + (y * vect.GetY()) + (z * vect.GetZ());
         }
 
         public Vector CrossProduct(Vector vect)
         {
             return new Vector(
-                    (y * vect.getZ()) - (z * vect.getY()),
-                    (z * vect.getX()) - (x * vect.getZ()),
-                    (x * vect.getY()) - (y * vect.getX())
+                    (y * vect.GetZ()) - (z * vect.GetY()),
+                    (z * vect.GetX()) - (x * vect.GetZ()),
+                    (x * vect.GetY()) - (y * vect.GetX())
                 );
         }
 
         public Vector Add(Vector vect)
         {
             return new Vector(
-                    (x + vect.getX()),
-                    (y + vect.getY()),
-                    (z + vect.getZ())
+                    (x + vect.GetX()),
+                    (y + vect.GetY()),
+                    (z + vect.GetZ())
                 );
         }
 
         public Vector Subtract(Vector vect)
         {
             return new Vector(
-                    (x - vect.getX()),
-                    (y - vect.getY()),
-                    (z - vect.getZ())
+                    (x - vect.GetX()),
+                    (y - vect.GetY()),
+                    (z - vect.GetZ())
                 );
         }
 
@@ -86,9 +86,9 @@ namespace Raytracer2
         public Vector Divide(Vector vect)
         {
             return new Vector(
-                    (x / vect.getX()),
-                    (y / vect.getY()),
-                    (z / vect.getZ())
+                    (x / vect.GetX()),
+                    (y / vect.GetY()),
+                    (z / vect.GetZ())
                 );
         }
 

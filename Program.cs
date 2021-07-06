@@ -31,7 +31,14 @@ namespace Raytracer2
             Sphere sphere = new Sphere(spherePoint, radius05, diffuseSteelBlueMetal);
             Sphere sphere2 = new Sphere(spherePoint2, radius05, diffuseBlueMaterial);
 
-            Shape[] shapesList = { sphere, sphere2 };
+            Triangle tri = new Triangle(
+                new Point(-1, -1, 0),
+                new Point(-1, 1, 0),
+                new Point(1, 1, 0),
+                diffuseRedMaterial
+                );
+
+            Shape[] shapesList = { sphere, tri };
 
             // - - - Image - - -
             IniReader iniReader = new IniReader();
@@ -52,14 +59,11 @@ namespace Raytracer2
             Camera camera = new Camera(pos, lookAt, viewUp, img.GetWidth(), img.GetHeight(), 50);
 
             // - - - Lights - - -
-            Point lightPoint1 = new Point(0, 1, 1);
-            Light light1 = new Light(1, Color.White, lightPoint1);
+            Light light1 = new Light(1, Color.White, new Point(0, -1, -1));
 
-            Point lightPoint2 = new Point(0, -1, 1);
-            Light light2 = new Light(1, Color.White, lightPoint2);
+            Light light2 = new Light(1, Color.White, new Point(0, 1, 1));
 
-
-            Light[] Lightlist = { light1, light2 };
+            Light[] Lightlist = { light1 };
 
             // - - - Scene - - -
             Scene scene = new Scene(camera, shapesList, Lightlist);

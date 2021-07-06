@@ -32,9 +32,9 @@ namespace Raytracer2
             Sphere sphere2 = new Sphere(spherePoint2, radius05, diffuseBlueMaterial);
 
             Triangle tri = new Triangle(
-                new Point(-1, -1, 0),
-                new Point(-1, 1, 0),
-                new Point(1, 1, 0),
+                new Point(-1, 2, 0),
+                new Point(-1, -2, 0),
+                new Point(1, -2, 0),
                 diffuseRedMaterial
                 );
 
@@ -59,7 +59,7 @@ namespace Raytracer2
             Camera camera = new Camera(pos, lookAt, viewUp, img.GetWidth(), img.GetHeight(), 50);
 
             // - - - Lights - - -
-            Light light1 = new Light(1, Color.White, new Point(0, -1, -1));
+            Light light1 = new Light(1, Color.White, new Point(2, 1, 2));
 
             Light light2 = new Light(1, Color.White, new Point(0, 1, 1));
 

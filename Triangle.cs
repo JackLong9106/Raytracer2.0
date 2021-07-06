@@ -16,16 +16,16 @@ namespace Raytracer2
 			vertex3 = v3;
 			material = mat;
 
-			double midX = (v1.GetX() + v2.GetX() + v3.GetX()) / 3;
-			double midY = (v1.GetY() + v2.GetY() + v3.GetY()) / 3;
-			double midZ = (v1.GetZ() + v2.GetZ() + v3.GetZ()) / 3;
-
-			midPoint = new Point(midX, midY, midZ);
+			midPoint = new Point(
+				(v1.GetX() + v2.GetX() + v3.GetX()) / 3,
+				(v1.GetY() + v2.GetY() + v3.GetY()) / 3,
+				(v1.GetZ() + v2.GetZ() + v3.GetZ()) / 3
+				);
 
 			edge1 = new Vector(v2, v1);
 			edge2 = new Vector(v3, v1);
 
-			normal = edge1.CrossProduct(this.edge2);
+			normal = edge2.CrossProduct(edge1);
 			normal.Normalise();
 		}
 
@@ -43,7 +43,7 @@ namespace Raytracer2
 			}
 
 			double rayDot2Inverse = (double)(1.0 / rayDotEdge2);
-			Point raySubEdge2 = rayOrigin.Subtract(this.vertex1);
+			Point raySubEdge2 = rayOrigin.Subtract(vertex1);
 			double rayDotVert1 = raySubEdge2.DotProduct(rayCrossEdge2) * rayDot2Inverse;
 
 			if (rayDotVert1 < 0 || rayDotVert1 > 1)
@@ -61,10 +61,10 @@ namespace Raytracer2
 			else
 			{
 				Vector raySubVert1 = new Vector(ray.GetOrigin(), vertex1);
-				Vector rayCrossEdge1 = raySubVert1.CrossProduct(this.edge1);
-				double a = this.edge1.DotProduct(rayCrossEdge2);
+				Vector rayCrossEdge1 = raySubVert1.CrossProduct(edge1);
+				double a = edge1.DotProduct(rayCrossEdge2);
 				double f = 1.0 / a;
-				double distance = f * this.edge2.DotProduct(rayCrossEdge1);
+				double distance = f * edge2.DotProduct(rayCrossEdge1);
 
 				if (distance <= 0)
 				{
